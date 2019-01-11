@@ -14,14 +14,6 @@ public class JwtResponse {
     private String phone;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public JwtResponse(String accessToken,
-                       String username,
-                       Collection<? extends GrantedAuthority> authorities) {
-        this.token = accessToken;
-        this.username = username;
-        this.authorities = authorities;
-    }
-
     public JwtResponse(String token,
                        String username,
                        String password,
