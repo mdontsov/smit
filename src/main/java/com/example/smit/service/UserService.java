@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService implements UserDetails {
 
     private static final Long serialVersionUID = 1L;
@@ -35,6 +37,9 @@ public class UserService implements UserDetails {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.authorities = authorities;
+    }
+
+    public UserService() {
     }
 
     public Long getId() {

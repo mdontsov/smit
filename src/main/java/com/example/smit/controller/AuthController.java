@@ -11,6 +11,7 @@ import com.example.smit.request.SignUpForm;
 import com.example.smit.response.JwtResponse;
 import com.example.smit.response.ResponseMessage;
 import com.example.smit.security.jwt.JwtProvider;
+import com.example.smit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,9 +55,15 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        UserService userService = (UserService) authentication.getPrincipal();
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse
+                (jwt,
+                        userService.getUsername(),
+                        userService.getPassword(),
+                        userService.getFullName(),
+                        userService.getPhoneNumber(),
+                        userService.getAuthorities()));
     }
 
     @PostMapping("/signup")
