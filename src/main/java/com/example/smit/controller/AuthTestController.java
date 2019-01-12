@@ -20,19 +20,19 @@ public class AuthTestController {
     @GetMapping("/test/user")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public String userAccess() {
-        return ">>> User Contents!";
+        return "Logged as User";
     }
 
     @GetMapping("/test/smit")
     @PreAuthorize("hasRole('SMIT') or hasRole('ADMIN')")
     public String projectManagementAccess() {
-        return ">>> Project Management Board";
+        return "Logged as Superuser";
     }
 
     @GetMapping("/test/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {
-        return ">>> Admin Contents";
+        return "Logged as Admin";
     }
 
     @GetMapping("/test/userDetails")
